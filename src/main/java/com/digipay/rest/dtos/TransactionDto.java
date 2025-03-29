@@ -12,6 +12,7 @@ public class TransactionDto {
     private String receiverId;
     private Double amount;
     private TransactionStatus status;
+    private String remark;
 
     public static TransactionDto from(Transaction transaction) {
         TransactionDto dto = new TransactionDto();
