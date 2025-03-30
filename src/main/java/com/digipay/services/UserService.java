@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 @Service
@@ -29,6 +30,7 @@ public class UserService {
                 .id(User.generateRandomUserId())
                 .name(userDto.getName())
                 .balance(userDto.getBalance())
+                .currency(userDto.getCurrency() == null ? Currency.getInstance("USD") : Currency.getInstance(userDto.getCurrency()))
                 .build();
 
         return UserDto.from (userRepository.saveUser(user));

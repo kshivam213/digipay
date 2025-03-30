@@ -3,6 +3,8 @@ package com.digipay.entities;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
+
+import java.util.Currency;
 import java.util.concurrent.locks.ReentrantLock;
 
 import java.math.BigDecimal;
@@ -16,6 +18,7 @@ public class User {
     private String id;
     private String name;
     private BigDecimal balance;
+    private Currency currency;
     private final ReentrantLock lock = new ReentrantLock();
 
     public static String generateRandomUserId() {

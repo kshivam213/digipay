@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +47,7 @@ public class UserServiceTest {
         user = User.builder()
                 .id("123")
                 .balance(BigDecimal.valueOf(1000.00))
+                .currency(Currency.getInstance("USD"))
                 .name("John Doe")
                 .build();
     }

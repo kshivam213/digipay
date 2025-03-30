@@ -13,12 +13,14 @@ public class UserDto {
     private String name;
     @JsonProperty("balance")
     private BigDecimal balance;
+    private String currency;
 
     public static UserDto from(User user) {
         UserDto dto = new UserDto();
         dto.id = user.getId();
         dto.name = user.getName();
         dto.balance = user.getBalance();
+        dto.currency = user.getCurrency().getCurrencyCode();
         return dto;
     }
 }
