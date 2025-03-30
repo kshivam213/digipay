@@ -37,21 +37,68 @@ POST http://localhost:8080/api/users
 }
 ```
 
-**Response Body
+**Response Body**
 
 ```json
 {
-    "success": true,
-    "message": "User created successfully",
-    "data": {
-        "id": "1f96e31265e640",
-        "name": "MS Dhoni",
-        "balance": 12000.00
-    }
+   "success": true,
+   "message": "User created successfully",
+   "data": {
+      "id": "3d50d8ea314148",
+      "name": "John Doe",
+      "currency": "INR",
+      "balance": 12000.00
+   }
 }
 ```
 
+### 2. Fetch User
+GET http://localhost:8080/api/users/3d50d8ea314148
+
+**Response Body**
+
+```json
+{
+   "success": true,
+   "message": "User retrieved successfully",
+   "data": {
+      "id": "3d50d8ea314148",
+      "name": "MS Dhoni",
+      "currency": "INR",
+      "balance": 12000.00
+   }
+}
+```
+
+### 3. Make Payment
+
+POST http://localhost:8080/api/transaction
 
 
+**Request Body**
 
-    
+```json
+{
+   "senderId": "2909cc4502374d",
+   "receiverId": "1f96e31265e640",
+   "amount": 500
+}
+```
+
+**Response Body**
+
+```json
+{
+   "success": true,
+   "message": "Successfully made transaction",
+   "data": {
+      "transactionId": "853eb2a702c349",
+      "senderId": "2909cc4502374d",
+      "receiverId": "1f96e31265e640",
+      "amount": 500,
+      "status": "SUCCESS",
+      "remark": null
+   }
+}
+```
+
