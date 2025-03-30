@@ -5,6 +5,7 @@ import com.digipay.rest.DigipayException;
 import com.digipay.rest.dtos.UserDto;
 import com.digipay.entities.User;
 import com.digipay.repositories.UserRepository;
+import com.digipay.validators.UserValidator;
 import io.micrometer.common.util.StringUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,17 +20,15 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserValidator userValidator;
 
     public UserDto createUser(UserDto userDto) {
 
-        if (userDto == null) throw new DigipayException("Request Body can't be null", HttpStatus.BAD_REQUEST);
-        if (StringUtils.isEmpty(userDto.getName())) throw new DigipayException("Name can't be null or empty", HttpStatus.BAD_REQUEST);
-        if (userDto.getBalance() <= 0) throw new DigipayException("Balance can't be less than 0", HttpStatus.BAD_REQUEST);
-
+        userValidator.validateUserDetails(userDto);
         User user = User.builder()
                 .id(User.generateRandomUserId())
                 .name(userDto.getName())
-                .balance(BigDecimal.valueOf(userDto.getBalance()))
+                .balance(userDto.getBalance())
                 .build();
 
         return UserDto.from (userRepository.saveUser(user));
@@ -49,13 +48,13 @@ public class UserService {
         for (UserDto userDto : userDtos) {
 
             if (StringUtils.isEmpty(userDto.getId())) throw new DigipayException("User id can't be null or empty", HttpStatus.BAD_REQUEST);
-            if (userDto.getBalance() <= 0) throw new DigipayException("Balance can't be less than 0", HttpStatus.BAD_REQUEST);
+            if (userDto.getBalance().doubleValue() <= 0) throw new DigipayException("Balance can't be less than 0", HttpStatus.BAD_REQUEST);
 
             User userToUpdate = userRepository.getUserById(userDto.getId());
             if (userToUpdate == null) throw new DigipayException("User not found", HttpStatus.NOT_FOUND);
 
             userToUpdate.setName(userDto.getName());
-            userToUpdate.setBalance(BigDecimal.valueOf(userDto.getBalance()));
+            userToUpdate.setBalance(userDto.getBalance());
 
             usersToUpdate.add(userToUpdate);
         }

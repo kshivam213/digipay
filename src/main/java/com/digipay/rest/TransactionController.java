@@ -1,7 +1,6 @@
 package com.digipay.rest;
 
 import com.digipay.rest.dtos.TransactionDto;
-import com.digipay.rest.dtos.UserDto;
 import com.digipay.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

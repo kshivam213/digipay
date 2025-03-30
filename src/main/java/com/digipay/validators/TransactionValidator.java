@@ -19,7 +19,7 @@ public class TransactionValidator {
         if (StringUtils.isEmpty(transactionDto.getReceiverId())) {
             throw new DigipayException("Receiver Id can't be null or empty", HttpStatus.BAD_REQUEST);
         }
-        if (transactionDto.getAmount() <= 0) {
+        if (transactionDto.getAmount().doubleValue() <= 0) {
             throw new DigipayException("Amount can't be less than 0", HttpStatus.BAD_REQUEST);
         }
     }
