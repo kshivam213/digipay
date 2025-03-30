@@ -15,7 +15,11 @@ To set up and run the **Digipay** payment service locally, follow these steps:
     ```sh
    ./gradlew clean build
 
-4. Start the application:
+4. Run all test cases 
+   ```sh
+   ./gradlew test
+
+5. Start the application:
     ```sh
    Run DigipayApplication.java
 
