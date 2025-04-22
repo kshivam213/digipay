@@ -13,4 +13,9 @@ public class TransactionRepositoryImpl implements TransactionRepository {
     public Transaction saveTransaction(Transaction transaction) {
         return baseRepository.save(transaction);
     }
+
+    @Override
+    public Transaction getById(String id) {
+        return baseRepository.getById(id);
+    }
 }

@@ -66,4 +66,12 @@ public class TransactionService {
 
         return TransactionDto.from(transactionRepository.saveTransaction(transaction));
     }
+
+    public TransactionDto getTransaction(String transactionId) {
+        Transaction transaction = transactionRepository.getById(transactionId);
+        if (transaction == null) {
+            throw new DigipayException("Transaction not found", HttpStatus.NOT_FOUND);
+        }
+        return TransactionDto.from(transaction);
+    }
 }

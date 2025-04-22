@@ -4,4 +4,5 @@ import com.digipay.entities.Transaction;
 
 public interface TransactionRepository {
     Transaction saveTransaction(Transaction transaction);
+    Transaction getById(String id);
 }
